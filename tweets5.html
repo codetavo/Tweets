@@ -9,6 +9,7 @@
             type="text/javascript"></script>
     <script src="http://api.simile-widgets.org/exhibit/3.1.0rc/extensions/time/time-extension.js"
             type="text/javascript"></script>
+    <link rel="exhibit-extension" href="http://api.simile-widgets.org/exhibit/3.1.0rc/extensions/map/map-extension.js" data-ex-apikey="AIzaSyCDO3EXWKJms5T38db48czFJZDunhYIzn8" />
 
     <style>
        body {
@@ -41,7 +42,7 @@
     <h1 align="center">Listado de Tweets</h1>
     <table width="100%">
         <tr valign="top">
-            <td ex:role="viewPanel">
+            <td ex:role="viewPanel" ex:showAll="false" ex:paginate="true" ex:pageSize="30">
                     <table ex:role="lens" class="lista">
                        <tr align="center">
                            <td>
@@ -67,7 +68,7 @@
                      ex:label="Detalles"
                      ex:orders=".created_at"
                      ex:viewClass="Tile"
-                     ex:possibleOrders=".created_at, .label, .user_description"
+                     ex:possibleOrders=".created_at, .label, .user_description, .user_location"
                      ex:showSummary="false"
                      ex:paginate="true"
                      ex:pageSize="30"
@@ -76,6 +77,7 @@
                      ex:grouped="false">
                 </div>
                 <div ex:role="view"
+                     ex:label="Linea de Tiempo"
                      ex:viewClass="Timeline"
                      ex:start=".fecha"
                      ex:colorKey=".label"
@@ -86,14 +88,20 @@
                      ex:topBandHeight=90
                      ex:bottomBandPixelsPerUnit=50>
                 </div>
+                <div ex:role="view"
+                     ex:label="Mapa de Tweets" 
+                     ex:viewClass="Map" 
+                     ex:latlng=".coordenadas"
+                     >
+                </div>
             <td width="25%">
               <div ex:role="facet" ex:facetClass="TextSearch" ex:facetLabel="Buscador:"></div>
               <div ex:role="facet" ex:expression=".label" ex:sortMode="count" ex:facetLabel="Autores:"></div>
               <div ex:role="facet" ex:expression=".hashtags" ex:sortMode="count" ex:showMissing="false" ex:facetLabel="Hashtags:"></div>
-              <div ex:role="facet" ex:expression=".user_location" ex:sortMode="count" ex:showMissing="false" ex:facetLabel="Paises:"></div>
+              <div ex:role="facet" ex:expression=".user_location" ex:sortMode="count" ex:showMissing="false" ex:facetLabel="Cuidades - Paises:"></div>
               <div ex:role="facet" ex:expression=".user_lang" ex:sortMode="count" ex:showMissing="false" ex:facetLabel="Lenguaje:"></div>
-              <div ex:role="facet" ex:facetClass="NumericRange" ex:expression=".retweet_count" ex:interval="100" ex:facetLabel="Cantidad de Retweets:"></div>
-              <div ex:role="facet" ex:facetClass="NumericRange" ex:expression=".followers_count" ex:interval="10000" ex:facetLabel="Cantidad de Seguidores:"></div>
+              <div ex:role="facet" ex:facetClass="NumericRange" ex:expression=".retweet_count" ex:interval="1000" ex:facetLabel="Cantidad de Retweets:"></div>
+              <div ex:role="facet" ex:facetClass="NumericRange" ex:expression=".followers_count" ex:interval="100000" ex:facetLabel="Cantidad de Seguidores:"></div>
               <div ex:role="facet" ex:facetClass="NumericRange" ex:expression=".favourites_count" ex:interval="100" ex:facetLabel="Cantidad de Me Gusta:"></div>
             </td> 
         </tr>
